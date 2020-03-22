@@ -4,7 +4,7 @@ WouldYouRather is a web application that allows users to vote on Would You Rathe
 
 ## Getting Started
 
-* Clone the project `git clone https://github.com/akuntaniguchi/MyReads.git`
+* Clone the project `git clone https://github.com/akuntaniguchi/WouldYouRather.git`
 * Install the project dependencies with `yarn install`
 * Start the development server with `yarn start`
 

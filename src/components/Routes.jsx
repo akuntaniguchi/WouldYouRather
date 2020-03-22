@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import { Switch, Route } from "react-router-dom";
 import Login from "./Login";
@@ -12,18 +12,17 @@ import PropTypes from "prop-types";
 
 const Routes = (props) => {
   return <div className="container">
-    <Switch>
-      { !props.loggedIn ? <Route path='/' exact component={ Login }/> :
-        <Fragment>
-          <Route path='/' exact component={ Dashboard } />
-          <Route path='/add' component={ NewQuestion }/>
-          <Route path='/leaderboard' exact component={ Leaderboard } />
-          <Route path="/questions/:id" component={ QuestionDetails } />
-          <Route exact path='/logout' component={ Logout } />
-        </Fragment>
-      }
-      <Route component={ PageNotFound } />
-    </Switch>
+    { !props.loggedIn ? <Route path='/' component={ Login }/> :
+      <Switch>
+        <Route exact path='/' component={ Dashboard } />
+        <Route exact path='/add' component={ NewQuestion }/>
+        <Route exact path='/leaderboard' component={ Leaderboard } />
+        <Route exact path="/questions/:id" component={ QuestionDetails } />
+        <Route exact path='/logout' component={ Logout } />
+        <Route component={ PageNotFound } />
+      </Switch>
+    }
+      
   </div>
 }
 

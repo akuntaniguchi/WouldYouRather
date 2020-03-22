@@ -22,7 +22,7 @@ class QuestionDetails extends Component {
   }
 
   render() {
-    const { question, answer, questionAuthor, totalVotes, option1Percent, option2Percent } = this.props;
+    const { question, answer, questionAuthor, optionOneVotes, optionTwoVotes, totalVotes, option1Percent, option2Percent } = this.props;
     const { selectedOption } = this.state;
 
     return (
@@ -38,10 +38,12 @@ class QuestionDetails extends Component {
                 <div>
                   <div className='container'>
                     <CardSubtitle>{ question.optionOne.text }</CardSubtitle>
+                    <CardSubtitle>{ `Votes: ${optionOneVotes}` }</CardSubtitle>
                     <Progress value={ option1Percent }>{ option1Percent }</Progress>
                   </div>
                   <div className='container'>
                     <CardSubtitle>{ question.optionTwo.text }</CardSubtitle>
+                    <CardSubtitle>{ `Votes: ${optionTwoVotes}`}</CardSubtitle>
                     <Progress value={ option2Percent }>{ option2Percent }</Progress>
                   </div>
                   <div className='container'>
@@ -89,7 +91,9 @@ const mapStateToProps = ({ questions, users, authedUser }, { match }) => {
   }
 
   const questionAuthor = users[question.author];
-  const totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length;
+  const optionOneVotes = question.optionOne.votes.length;
+  const optionTwoVotes = question.optionTwo.votes.length;
+  const totalVotes = optionOneVotes + optionTwoVotes;
   const option1Percent = Number.parseFloat((question.optionOne.votes.length/totalVotes) * 100).toFixed(2);
   const option2Percent = Number.parseFloat((question.optionTwo.votes.length/totalVotes) * 100).toFixed(2);
 
@@ -97,6 +101,8 @@ const mapStateToProps = ({ questions, users, authedUser }, { match }) => {
     question,
     answer,
     questionAuthor,
+    optionOneVotes,
+    optionTwoVotes,
     totalVotes,
     option1Percent,
     option2Percent
